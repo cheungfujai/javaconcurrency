@@ -1,4 +1,4 @@
-package com.cheungjaidev.service.java1util;
+package com.cheungjaidev.service.java1;
 
 import com.cheungjaidev.domain.Review;
 import com.cheungjaidev.service.ReviewService;

@@ -1,4 +1,4 @@
-package com.cheungjaidev.service.java1util;
+package com.cheungjaidev.service.java1;
 
 import com.cheungjaidev.domain.ProductInfo;
 import com.cheungjaidev.service.ProductInfoService;

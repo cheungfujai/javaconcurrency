@@ -3,8 +3,6 @@ package com.cheungjaidev.service;
 import com.cheungjaidev.domain.Product;
 import com.cheungjaidev.domain.ProductInfo;
 import com.cheungjaidev.domain.Review;
-import com.cheungjaidev.service.java1util.ProductInfoRunnable;
-import com.cheungjaidev.service.java1util.ReviewRunnable;
 import lombok.NonNull;
 
 import static com.cheungjaidev.util.LoggerUtil.log;
@@ -23,7 +21,7 @@ public class ProductService {
     }
 
 
-    public Product retrieveProductNoPerformanceEnhancement(
+    public Product retrieveProduct(
             @NonNull final String productId
     ) {
         stopWatch.start();
@@ -36,30 +34,6 @@ public class ProductService {
         log("Total Time Taken : "+ stopWatch.getTime());
 
         return new Product(productId, productInfo, review);
-    }
-
-    public Product retrieveProductJava1(
-            @NonNull final String productId
-    ) throws InterruptedException {
-        stopWatch.start();
-
-        ProductInfoRunnable productInfoRunnable = new ProductInfoRunnable(productId, productInfoService);
-        ReviewRunnable reviewRunnable = new ReviewRunnable(productId, reviewService);
-
-        Thread productInfoThread = new Thread(productInfoRunnable);
-        Thread reviewThread = new Thread(reviewRunnable);
-
-        productInfoThread.start();
-        reviewThread.start();
-
-        productInfoThread.join();
-        reviewThread.join();
-
-        stopWatch.stop();
-
-        log("Total Time Taken : "+ stopWatch.getTime());
-
-        return new Product(productId, productInfoRunnable.getProductInfo(), reviewRunnable.getReview());
     }
 
 }
